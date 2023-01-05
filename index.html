@@ -10,7 +10,7 @@
   <title>ToDo List App</title>
 </head>
 <body>
-  <header class="bg-grey-opacity p-2 mb-3 mb-md-4">
+  <header class="bg-grey-opacity p-2 mb-md-4">
     <div class="container">
       <div class="row">
         <div class="col-12 d-flex align-items-center justify-content-between">
@@ -25,66 +25,70 @@
   </header>
   <main>
 
-    <section class="task-list">
+    <section class="input-group mb-4">
       <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <ul class="nav nav-pills" id="navPanel">
-              <li class="nav-item bg-grey-opacity">
-                <button class="nav-link link-light active rounded-0" type="button" id="actualList">Actual</button>
-              </li>
-              <li class="nav-item bg-grey-opacity">
-                <button class="nav-link link-light rounded-0" type="button" id="doneList">
-                  Done
-                  <span class="badge" id="doneCountBadge"></span>
-                </button>
-              </li>
-              <li class="nav-item bg-grey-opacity">
-                <button class="nav-link link-light rounded-0" type="button" id="deletedList">
-                  Removed
-                  <span class="badge" id="removedCountBadge"></span>
-                </button>
-              </li>
-            </ul>
-            <ul class="m-0 mb-3 mb-md-4 p-3 bg-grey-opacity" id="tasksList"></ul>
+        <form id="inputForm">
+          <div class="row align-items-center">
+            <div class="col-auto">
+              <label class="sr-only visually-hidden" for="nameInput"></label>
+              <input type="text" class="form-control" id="nameInput" placeholder="Company name*" required>
+            </div>
+            <div class="col-auto">
+              <label class="sr-only visually-hidden" for="contactInput"></label>
+              <input type="text" class="form-control" id="contactInput" placeholder="Contact name*" required>
+            </div>
+            <div class="col-auto">
+              <label class="sr-only visually-hidden" for="addressInput"></label>
+              <input type="text" class="form-control" id="addressInput" placeholder="Address*" required>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary" id="addButton">+</button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </section>
 
-    <section class="add-tasks">
+    <section class="task-list">
       <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <div class="p-3 bg-grey-opacity" id="addTaskBlock">
-              <p class="m-0 mb-3 p-0 h5 text-center text-light">Add new task</p>
-              <!-- Form -->
-              <form id="form">
-                <fieldset class="mb-3 d-flex flex-column">
-                  <input class="m-0 mb-2 p-3 h4 border-0" title="Write your task here" id="task-input" type="text" placeholder="Task text" required>
-                  <label class="m-0 h5 text-light" for="task-input">Write here your target, scheduled time, expected result</label>
-                </fieldset>
-                <button class="p-3 btn btn-success w-100 rounded-3" type="submit">
-                  <span class="h5">Add to list</span>
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="checkAll">
+                  <label class="form-check-label visually-hidden" for="checkAll"></label>
+                </div>
+              </th>
+              <th scope="col">Company Name</th>
+              <th scope="col">Contact Name</th>
+              <th scope="col">Address</th>
+              <th scope="col">City</th>
+              <th scope="col">Country</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </div>
     </section>
 
   </main>
 
-  <!-- <template id="new-task-template">
-    <li class="${doneClassItem} new-task bg-light rounded-3 d-flex p-1 ps-2 pe-2 mb-1" id="${task.id}">
-      <span class="${doneClassText} h4 m-0 lh-2">${task.text}</span>
-      <div class="ms-auto d-flex align-items-center gap-2 justify-content-center ps-2">
-        <button class="btn btn-outline-success btn-sm" type="button" data-action="done">&#10003;</button>
-        <button class="btn btn-outline-danger btn-sm" type="button" data-action="delete">&#10005;</button>
-      </div>  
-    </li>
-  </template> -->
+  <template id="newRow">
+    <tr>
+      <th scope="row">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="check">
+          <label class="form-check-label visually-hidden" for="check"></label>
+        </div>
+      </th>
+      <td id="company"></td>
+      <td id="person"></td>
+      <td id="address"></td>
+      <td id="city"></td>
+      <td id="country"></td>
+    </tr>
+  </template>
 
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/main.js"></script>

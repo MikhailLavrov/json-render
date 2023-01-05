@@ -1,6 +1,6 @@
 :root {
   /* Blue */
-  --color-dark-blue: rgba(1, 31, 69, 0.858);
+  --color-dark-blue: rgba(255, 255, 255, 0.858);
   --color-light-blue: rgb(173, 206, 255);
   /* Green */
   --color-green: #198754;
@@ -10,52 +10,50 @@
   --color-grey-opacity: #99999985;
   --color-grey-light: #d5d5d5;
 }
+html,
+body {
+  margin: 0;
+  padding: 0;
 
-a {
-  text-decoration: none;
+  min-height: 100vh;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  width: 100%;
+  height: 100%;
   background-color: var(--color-dark-blue);
+}
+
+main {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
 }
 
 img {
   pointer-events: none;
 }
 
-.done-text {
-  opacity: 0.5;
-  text-decoration: line-through;
-  text-decoration-thickness: 10%;
-}
-
-.done-item {
-  background-color: var(--color-grey-light) !important;
-}
-
-.nav-item:hover,
-.nav-item:focus-within {
-  background-color: var(--color-grey);
-}
-
-.active {
-  background-color: var(--color-green) !important;
-  cursor: default !important;
-}
-
 .bg-grey-opacity {
   background-color: var(--color-grey-opacity);
 }
 
-.new-task:hover {
-  background-color: var(--color-grey-light) !important;
-}
+.visually-hidden {
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
 
-.badge {
-  background-color: var(--color-dark-blue);
-}
-
-.empty-list svg {
-  width: 60px;
-  height: 60px;
+  border: none;
+  position: absolute;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }

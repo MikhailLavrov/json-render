@@ -81,7 +81,22 @@ let delButtons = document.querySelectorAll('#delButton');
 
 const deleteItem = (evt) => {
   evt.preventDefault();
-  evt.target.parentNode.parentNode.remove();
+
+  const targetDelButton = evt.target;
+  const currentRowItem = targetDelButton.parentNode.parentNode;
+
+  currentRowItem.remove();
+
+  const returnListener = () => {
+    let editableButtons = document.querySelectorAll('.in-edit-process');
+    if (editableButtons.length === 0) {
+      editButtons.forEach((button) => {
+        button.addEventListener('click', makeItemEditable);
+      });
+    };
+  };
+  setTimeout(returnListener, 50);
+  
 }
 
 delButtons.forEach((button) => {
@@ -143,10 +158,9 @@ const finishItemEdition = (evt) => {
       };
     });
     
-
     editButtons.forEach((button) => {
       button.addEventListener('click', makeItemEditable);
-    })
+    });
   };
 }
 

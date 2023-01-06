@@ -4,6 +4,8 @@ const table = document.querySelector('tbody');
 const templateFragment = document.querySelector('#newRow').content;
 const template = templateFragment.querySelector('tr');
 
+// Create new Card with Template
+// -------------------------------------------------------
 const createNewCard = (obj) => {
   const card = template.cloneNode(true);
 
@@ -22,6 +24,8 @@ const createNewCard = (obj) => {
   return card;
 };
 
+// Render card
+// -------------------------------------------------------
 const renderList = () => {
   dataBase.forEach(object => {
     let newItem;
@@ -32,13 +36,15 @@ const renderList = () => {
 
 dataBase.length > 0 ? renderList() : null;
 
+// Add new Items
+// -------------------------------------------------------
 const inputForm = document.querySelector('#inputForm');
 const nameInput = inputForm.querySelector('#nameInput');
 const contactInput = inputForm.querySelector('#contactInput');
 const addressInput = inputForm.querySelector('#addressInput');
 const addButton = inputForm.querySelector('#addButton');
 
-const addFromInputs = () => {
+const addNewItem = () => {
   if (nameInput.value === '' || contactInput.value === '' || addressInput.value === '') {
     return;
   }
@@ -67,10 +73,10 @@ const addFromInputs = () => {
   addressInput.value = '';
 };
 
-addButton.addEventListener('click', addFromInputs)
+addButton.addEventListener('click', addNewItem)
 
 // Delete items
-
+// -------------------------------------------------------
 let delButtons = document.querySelectorAll('#delButton');
 
 const deleteItem = (evt) => {
@@ -83,12 +89,16 @@ delButtons.forEach((button) => {
 })
 
 // Edit items
-
+// -------------------------------------------------------
 let editButtons = document.querySelectorAll('#editButton');
 
 const makeItemEditable = (evt) => {
-  evt.preventDefault();
   const editButton = evt.target;
+
+  if (editButton.classList.contains('in-edit-process')) {
+    return;
+  };
+  
   const tableRow = editButton.parentNode.parentNode;
   const tableCells = tableRow.querySelectorAll('td');
   const firstCell = tableCells[0];
@@ -100,10 +110,25 @@ const makeItemEditable = (evt) => {
     firstCell.focus();
   });
 
-  editButton.textContent = 'Save';
-  editButton.classList.add('in-edit-process');
+  const changeBtnStatus = () => {
+    if (!editButton.classList.contains('in-edit-process'))
+    editButton.textContent = 'Save';
+    editButton.classList.add('in-edit-process');
+  }
+
+  setTimeout(changeBtnStatus, 100);
+}
+
+const finishItemEdition = (evt) => {
+  const editionButtonOn = document.querySelector('.in-edit-process');
+  if (evt.target === editionButtonOn) {
+    editionButtonOn.classList.remove('in-edit-process');
+    editionButtonOn.textContent = 'Edit';
+  }
 }
 
 editButtons.forEach((button) => {
-  button.addEventListener('click', makeItemEditable)
+  button.addEventListener('click', makeItemEditable);
 })
+
+document.addEventListener('click', finishItemEdition)

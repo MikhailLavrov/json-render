@@ -57,3 +57,15 @@ img {
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
+
+td[contenteditable="true"]:focus {
+  background-color: #ffffff;
+  box-shadow: none !important;
+}
+
+.in-edit-process,
+.in-edit-process:focus,
+.in-edit-process:hover {
+  background-color: #198754;
+  color: #ffffff
+}

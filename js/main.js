@@ -1,9 +1,8 @@
-import dataBase from './data.json' assert { type: "json" };
+import dataBase from '../data.json' assert { type: "json" };
 
 const table = document.querySelector('tbody');
 const templateFragment = document.querySelector('#newRow').content;
 const template = templateFragment.querySelector('tr');
-const mainCheckButton = document.querySelector('#checkAll');
 
 const createNewCard = (obj) => {
   const card = template.cloneNode(true);
@@ -32,22 +31,6 @@ const renderList = () => {
 };
 
 dataBase.length > 0 ? renderList() : null;
-
-const checkBoxes = document.querySelectorAll('#check');
-
-const addChecked = () => {
-  checkBoxes.forEach((button) => {
-    button.setAttribute('checked', true);
-  });
-};
-
-const removeChecked = () => {
-  checkBoxes.forEach((button) => {
-    button.removeAttribute('checked');
-  });
-};
-
-mainCheckButton.addEventListener('click', addChecked);
 
 const inputForm = document.querySelector('#inputForm');
 const nameInput = inputForm.querySelector('#nameInput');
@@ -85,3 +68,42 @@ const addFromInputs = () => {
 };
 
 addButton.addEventListener('click', addFromInputs)
+
+// Delete items
+
+let delButtons = document.querySelectorAll('#delButton');
+
+const deleteItem = (evt) => {
+  evt.preventDefault();
+  evt.target.parentNode.parentNode.remove();
+}
+
+delButtons.forEach((button) => {
+  button.addEventListener('click', deleteItem)
+})
+
+// Edit items
+
+let editButtons = document.querySelectorAll('#editButton');
+
+const makeItemEditable = (evt) => {
+  evt.preventDefault();
+  const editButton = evt.target;
+  const tableRow = editButton.parentNode.parentNode;
+  const tableCells = tableRow.querySelectorAll('td');
+  const firstCell = tableCells[0];
+
+  tableCells.forEach((item) => {
+    if (item.hasAttribute('id')) {
+      item.setAttribute('contenteditable', true);
+    };
+    firstCell.focus();
+  });
+
+  editButton.textContent = 'Save';
+  editButton.classList.add('in-edit-process');
+}
+
+editButtons.forEach((button) => {
+  button.addEventListener('click', makeItemEditable)
+})

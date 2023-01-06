@@ -117,6 +117,10 @@ const makeItemEditable = (evt) => {
   }
 
   setTimeout(changeBtnStatus, 50);
+
+  editButtons.forEach((button) => {
+    button.removeEventListener('click', makeItemEditable);
+  })
 }
 
 const finishItemEdition = (evt) => {
@@ -138,8 +142,12 @@ const finishItemEdition = (evt) => {
         item.removeAttribute('contenteditable');
       };
     });
+    
 
-  }
+    editButtons.forEach((button) => {
+      button.addEventListener('click', makeItemEditable);
+    })
+  };
 }
 
 editButtons.forEach((button) => {

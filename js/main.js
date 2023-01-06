@@ -4,7 +4,7 @@ const table = document.querySelector('tbody');
 const templateFragment = document.querySelector('#newRow').content;
 const template = templateFragment.querySelector('tr');
 
-// Create new Card with Template
+// *Create new Card with Template
 // -------------------------------------------------------
 const createNewCard = (obj) => {
   const card = template.cloneNode(true);
@@ -24,7 +24,7 @@ const createNewCard = (obj) => {
   return card;
 };
 
-// Render card
+// *Render card
 // -------------------------------------------------------
 const renderList = () => {
   dataBase.forEach(object => {
@@ -36,7 +36,7 @@ const renderList = () => {
 
 dataBase.length > 0 ? renderList() : null;
 
-// Add new Items
+// *Add new Items
 // -------------------------------------------------------
 const inputForm = document.querySelector('#inputForm');
 const nameInput = inputForm.querySelector('#nameInput');
@@ -75,7 +75,7 @@ const addNewItem = () => {
 
 addButton.addEventListener('click', addNewItem)
 
-// Delete items
+// *Delete items
 // -------------------------------------------------------
 let delButtons = document.querySelectorAll('#delButton');
 
@@ -88,18 +88,18 @@ delButtons.forEach((button) => {
   button.addEventListener('click', deleteItem)
 })
 
-// Edit items
+// *Edit items
 // -------------------------------------------------------
 let editButtons = document.querySelectorAll('#editButton');
 
 const makeItemEditable = (evt) => {
-  const editButton = evt.target;
+  const targetEditButton = evt.target;
 
-  if (editButton.classList.contains('in-edit-process')) {
+  if (targetEditButton.classList.contains('in-edit-process')) {
     return;
   };
   
-  const tableRow = editButton.parentNode.parentNode;
+  const tableRow = targetEditButton.parentNode.parentNode;
   const tableCells = tableRow.querySelectorAll('td');
   const firstCell = tableCells[0];
 
@@ -111,19 +111,34 @@ const makeItemEditable = (evt) => {
   });
 
   const changeBtnStatus = () => {
-    if (!editButton.classList.contains('in-edit-process'))
-    editButton.textContent = 'Save';
-    editButton.classList.add('in-edit-process');
+    if (!targetEditButton.classList.contains('in-edit-process'))
+    targetEditButton.textContent = 'Save';
+    targetEditButton.classList.add('in-edit-process');
   }
 
-  setTimeout(changeBtnStatus, 100);
+  setTimeout(changeBtnStatus, 50);
 }
 
 const finishItemEdition = (evt) => {
   const editionButtonOn = document.querySelector('.in-edit-process');
-  if (evt.target === editionButtonOn) {
+  const changeBtnStatus = () => {
     editionButtonOn.classList.remove('in-edit-process');
     editionButtonOn.textContent = 'Edit';
+  };
+
+  const targetEditButton = evt.target;
+  const tableRow = targetEditButton.parentNode.parentNode;
+  const tableCells = tableRow.querySelectorAll('td');
+
+  if (evt.target === editionButtonOn) {
+    changeBtnStatus();
+
+    tableCells.forEach((item) => {
+      if (item.hasAttribute('id')) {
+        item.removeAttribute('contenteditable');
+      };
+    });
+
   }
 }
 

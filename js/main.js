@@ -4,6 +4,20 @@ const table = document.querySelector('tbody');
 const templateFragment = document.querySelector('#newRow').content;
 const template = templateFragment.querySelector('tr');
 
+// *Utils
+// -------------------------------------------------------
+const startListenEditButtons = () => {
+  editButtons.forEach((button) => {
+    button.addEventListener('click', makeItemEditable);
+  });
+};
+
+const stopListenEditButtons = () => {
+  editButtons.forEach((button) => {
+    button.removeEventListener('click', makeItemEditable);
+  })
+};
+
 // *Create new Card with Template
 // -------------------------------------------------------
 const createNewCard = (obj) => {
@@ -47,7 +61,7 @@ const addButton = inputForm.querySelector('#addButton');
 const addNewItem = () => {
   if (nameInput.value === '' || contactInput.value === '' || addressInput.value === '') {
     return;
-  }
+  };
 
   const newCompany = nameInput.value;
   const newContact = contactInput.value;
@@ -90,14 +104,12 @@ const deleteItem = (evt) => {
   const returnListener = () => {
     let editableButtons = document.querySelectorAll('.in-edit-process');
     if (editableButtons.length === 0) {
-      editButtons.forEach((button) => {
-        button.addEventListener('click', makeItemEditable);
-      });
+      startListenEditButtons();
     };
   };
+
   setTimeout(returnListener, 50);
-  
-}
+};
 
 delButtons.forEach((button) => {
   button.addEventListener('click', deleteItem)
@@ -129,14 +141,12 @@ const makeItemEditable = (evt) => {
     if (!targetEditButton.classList.contains('in-edit-process'))
     targetEditButton.textContent = 'Save';
     targetEditButton.classList.add('in-edit-process');
-  }
+  };
 
   setTimeout(changeBtnStatus, 50);
 
-  editButtons.forEach((button) => {
-    button.removeEventListener('click', makeItemEditable);
-  })
-}
+  stopListenEditButtons();
+};
 
 const finishItemEdition = (evt) => {
   const editionButtonOn = document.querySelector('.in-edit-process');
@@ -158,14 +168,10 @@ const finishItemEdition = (evt) => {
       };
     });
     
-    editButtons.forEach((button) => {
-      button.addEventListener('click', makeItemEditable);
-    });
+    startListenEditButtons();
   };
 }
 
-editButtons.forEach((button) => {
-  button.addEventListener('click', makeItemEditable);
-})
+startListenEditButtons();
 
 document.addEventListener('click', finishItemEdition)

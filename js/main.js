@@ -1,4 +1,5 @@
 import dataBase from '../data.json' assert { type: "json" };
+import { renderList } from './modules/renderList.js';
 
 const table = document.querySelector('tbody');
 const templateFragment = document.querySelector('#newRow').content;
@@ -20,33 +21,11 @@ const stopListenEditButtons = () => {
 
 // *Create new Card with Template
 // -------------------------------------------------------
-const createNewCard = (obj) => {
-  const card = template.cloneNode(true);
 
-  let company = card.querySelector('#company');
-  let person = card.querySelector('#person');
-  let address = card.querySelector('#address');
-  let city = card.querySelector('#city');
-  let country = card.querySelector('#country');
-
-  company.textContent = obj.company;
-  person.textContent = obj.name;
-  address.textContent = obj.address;
-  city.textContent = obj.city;
-  country.textContent = obj.country;
-
-  return card;
-};
 
 // *Render card
 // -------------------------------------------------------
-const renderList = () => {
-  dataBase.forEach(object => {
-    let newItem;
-    newItem = createNewCard(object);
-    table.append(newItem);
-  });
-};
+renderList();
 
 dataBase.length > 0 ? renderList() : null;
 

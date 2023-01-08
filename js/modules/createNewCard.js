@@ -1,5 +1,4 @@
 
-const table = document.querySelector('tbody');
 const templateFragment = document.querySelector('#newRow').content;
 const template = templateFragment.querySelector('tr');
 

@@ -1,4 +1,3 @@
-
 const templateFragment = document.querySelector('#newRow').content;
 const template = templateFragment.querySelector('tr');
 

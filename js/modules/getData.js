@@ -1,4 +1,4 @@
-const DATA_URL = '../data.json';
+const DATA_URL = '../../data.json';
 
 const getData = (onSuccess) => {
   fetch(DATA_URL)

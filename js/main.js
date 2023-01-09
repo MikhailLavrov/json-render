@@ -5,16 +5,21 @@ import { startListenDelButtons } from './utils/startListenDelButtons.js';
 import { onSuccessLoadData } from './utils/onSuccessLoadData.js';
 import { getData } from './modules/getData.js';
 
-const addButton = document.querySelector('#addButton');
+window.addEventListener('DOMContentLoaded', () => {
 
-getData(onSuccessLoadData);
+  const addButton = document.querySelector('#addButton');
 
-// *Add new Items
-addButton.addEventListener('click', addNewItem);
+  getData(onSuccessLoadData);
 
-// *Delete items
-startListenDelButtons();
+  // *Add new Items
+  addButton.addEventListener('click', addNewItem);
 
-// *Edit items
-startListenEditButtons();
-document.addEventListener('click', finishItemEdition);
+  // *Delete items
+  startListenDelButtons();
+
+  // *Edit items
+  // setTimeout(() => startListenEditButtons(), 200)
+  startListenEditButtons();
+  document.addEventListener('click', finishItemEdition);
+    
+});

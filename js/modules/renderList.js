@@ -1,14 +1,9 @@
-import dataBase from '../../data.json' assert { type: "json" };
 import { createNewCard } from "./createNewCard.js";
 
 const table = document.querySelector('tbody');
 
-const renderList = () => {
-  dataBase.forEach(object => {
-    let newItem;
-    newItem = createNewCard(object);
-    table.append(newItem);
-  });
+const renderList = (items) => {
+  items.forEach(item => table.append(createNewCard(item)));
 }
 
 export {renderList};

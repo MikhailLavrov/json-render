@@ -18,7 +18,6 @@ window.addEventListener('DOMContentLoaded', () => {
   startListenDelButtons();
 
   // *Edit items
-  // setTimeout(() => startListenEditButtons(), 200)
   startListenEditButtons();
   document.addEventListener('click', finishItemEdition);
     

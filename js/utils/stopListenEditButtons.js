@@ -1,9 +1,7 @@
 import { makeItemEditable } from "./makeItemEditable.js";
 
-const stopListenEditButtons = () => {
-  let editButtons = document.querySelectorAll('#editButton');
-  
-  editButtons.forEach((button) => {
+const stopListenEditButtons = (buttons) => {
+  buttons.forEach((button) => {
     button.removeEventListener('click', makeItemEditable);
   })
 }

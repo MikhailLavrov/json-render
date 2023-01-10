@@ -1,7 +1,8 @@
 import { stopListenEditButtons } from "./stopListenEditButtons.js";
 
 const makeItemEditable = (evt) => {
-  const targetEditButton = evt.target;
+  let targetEditButton = evt.target;
+  let editButtons = document.querySelectorAll('#editButton');
 
   if (targetEditButton.classList.contains('in-edit-process')) {
     return;
@@ -26,7 +27,7 @@ const makeItemEditable = (evt) => {
 
   setTimeout(changeEditBtnStatus, 50);
 
-  stopListenEditButtons();
+  stopListenEditButtons(editButtons);
 }
 
 export {makeItemEditable};

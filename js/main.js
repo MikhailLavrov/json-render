@@ -1,6 +1,6 @@
-import { startListenEditButtons } from './utils/startListenEditButtons.js';
+import { startListenEditButtons } from './utils/editionButtonsUtils.js';
 import { addNewItem } from './modules/addNewItem.js';
-import { finishItemEdition } from './utils/finishItemEdition.js';
+import { finishItemEdition } from './utils/editionButtonsUtils.js';
 import { startListenDelButtons } from './utils/startListenDelButtons.js';
 import { onSuccessLoadData } from './utils/onSuccessLoadData.js';
 import { getData } from './modules/getData.js';
@@ -20,5 +20,5 @@ window.addEventListener('DOMContentLoaded', () => {
   // *Edit items
   startListenEditButtons();
   document.addEventListener('click', finishItemEdition);
-    
+
 });

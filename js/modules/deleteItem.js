@@ -1,4 +1,4 @@
-import { startListenEditButtons } from "../utils/startListenEditButtons.js";
+import { startListenEditButtons } from "../utils/editionButtonsUtils.js";
 
 const deleteItem = (evt) => {
   evt.preventDefault();

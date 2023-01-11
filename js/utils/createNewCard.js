@@ -18,5 +18,6 @@ const createNewCard = (obj) => {
 
   return card;
 }
+// this f return card
 
 export {createNewCard};
